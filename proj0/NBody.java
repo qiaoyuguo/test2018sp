@@ -23,8 +23,8 @@ public class NBody {
     }
 
     public static void main(String[] args) {
-        double T = Integer.parseInt(args[0]);
-        double dt = Integer.parseInt(args[1]);
+        double T = Double.parseDouble(args[0]);
+        double dt = Double.parseDouble(args[1]);
         String filename = args[2];
 
         double radius = readRadius(filename);

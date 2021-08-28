@@ -2,7 +2,7 @@ public class LinkedListDeque<T> {
     private int size;
     private Node sentinel;
 
-    public class Node {
+    private class Node {
         private T item;
         private Node prev;
         private Node next;
@@ -13,17 +13,6 @@ public class LinkedListDeque<T> {
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         size = 0;
-    }
-
-    public LinkedListDeque(LinkedListDeque other) {
-        sentinel = new Node();
-        sentinel.next = sentinel;
-        sentinel.prev = sentinel;
-        size = 0;
-        Node head = other.sentinel.next;
-        while (head != other.sentinel) {
-            addLast(head.item);
-        }
     }
 
     /**

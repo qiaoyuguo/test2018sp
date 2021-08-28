@@ -11,7 +11,9 @@ public class ArrayDeque<T> {
 
     private void resize(int capacity) {
         T[] newItems = (T[]) new Object[capacity];
-        System.arraycopy(items, 0, newItems, 0, items.length);
+        System.arraycopy(items, 0, newItems, 0, last);
+        System.arraycopy(items, first, newItems, newItems.length - items.lenth + first,
+                items.length - first);
         items = newItems;
     }
 
@@ -41,7 +43,7 @@ public class ArrayDeque<T> {
      * Return true if deque is empty, otherwise returns false
      */
     public boolean isEmpty() {
-        return first == last && first == 0;
+        return first == last;
     }
 
     /**
@@ -90,9 +92,9 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+        last = (last - 1 + items.length) % items.length;
         T item = items[last];
         items[last] = null;
-        last = (last - 1 + items.length) % items.length;
         return item;
     }
 

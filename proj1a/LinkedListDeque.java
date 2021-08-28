@@ -15,6 +15,13 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
+    private T getRecursiveHelper(Node sent, int index) {
+        if (index == 0) {
+            return sent.next.item;
+        }
+        return getRecursiveHelper(sent.next, index - 1);
+    }
+
     /**
      * Same as get, but recursive
      */
@@ -22,10 +29,7 @@ public class LinkedListDeque<T> {
         if (index >= size || index < 0) {
             return null;
         }
-        if (index == 0) {
-            return sentinel.next.item;
-        }
-        return getRecursive(index - 1);
+        return getRecursiveHelper(sentinel, index);
     }
 
     /**

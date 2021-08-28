@@ -1,11 +1,11 @@
-public class LinkedListDeque<Item> {
+public class LinkedListDeque<T> {
     private int size;
     private Node sentinel;
 
     public class Node {
-        public Item item;
-        public Node prev;
-        public Node next;
+        private T item;
+        private Node prev;
+        private Node next;
     }
 
     public LinkedListDeque() {
@@ -29,19 +29,20 @@ public class LinkedListDeque<Item> {
     /**
      * Same as get, but recursive
      */
-    public Item getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index >= size || index < 0) {
             return null;
         }
-        if (index == 0)
+        if (index == 0) {
             return sentinel.next.item;
+        }
         return getRecursive(index - 1);
     }
 
     /**
-     * add an item of type Item to the front of the queue
+     * add an item of type T to the front of the queue
      */
-    public void addFirst(Item item) {
+    public void addFirst(T item) {
         Node node = new Node();
         node.item = item;
         sentinel.next.prev = node;
@@ -52,9 +53,9 @@ public class LinkedListDeque<Item> {
     }
 
     /**
-     * add an item of type Item to the deque
+     * add an item of type T to the deque
      */
-    public void addLast(Item item) {
+    public void addLast(T item) {
         Node node = new Node();
         node.item = item;
         sentinel.prev.next = node;
@@ -101,7 +102,7 @@ public class LinkedListDeque<Item> {
      * Removes and returns the item at the front of the deque.
      * If no such item exist, returns null.
      */
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
@@ -116,7 +117,7 @@ public class LinkedListDeque<Item> {
      * Removes and returns the item at the back of the deque.
      * If no such item exist, return null.
      */
-    public Item removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
@@ -131,7 +132,7 @@ public class LinkedListDeque<Item> {
      * Gets the item at the given index, where 0 is the front, 1 is the next item,
      * and so forth. If no such item exists, return null.
      */
-    public Item get(int index) {
+    public T get(int index) {
         if (index >= size || index < 0) {
             return null;
         }

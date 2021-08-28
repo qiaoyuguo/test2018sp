@@ -10,10 +10,12 @@ public class ArrayDeque<T> {
     }
 
     private void resize(int capacity) {
+        assert first == last;
         T[] newItems = (T[]) new Object[capacity];
-        System.arraycopy(items, 0, newItems, 0, last);
-        System.arraycopy(items, first, newItems, newItems.length - items.length + first,
-                items.length - first);
+        System.arraycopy(items, first, newItems, 0, items.length - first);
+        System.arraycopy(items, 0, newItems, items.length - first, last);
+        first = 0;
+        last = items.length;
         items = newItems;
     }
 
@@ -59,7 +61,7 @@ public class ArrayDeque<T> {
      */
     public void printDeque() {
         boolean isFirst = true;
-        for (int i = first; i < last; i = (i + 1) % items.length) {
+        for (int i = first; i != last; i = (i + 1) % items.length) {
             if (isFirst) {
                 isFirst = false;
             } else {

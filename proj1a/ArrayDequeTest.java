@@ -92,8 +92,9 @@ public class ArrayDequeTest {
         // should be empty
         boolean passed = checkEmpty(true, ad1.isEmpty());
         int N = 9;
-        for (int i = 0; i < N; i++)
+        for (int i = 0; i < N; i++) {
             ad1.addLast(i);
+        }
         ad1.addFirst(10);
         System.out.println(ad1.get(0));
         ad1.printDeque();

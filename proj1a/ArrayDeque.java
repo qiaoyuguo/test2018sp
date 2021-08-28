@@ -83,6 +83,9 @@ public class ArrayDeque<T> {
         T item = items[first];
         items[first] = null;
         first = (first + 1) % items.length;
+        if ((last - first + items.length) / (double) items.length < 0.25) {
+            resize(items.length / 2);
+        }
         return item;
     }
 
@@ -97,6 +100,9 @@ public class ArrayDeque<T> {
         last = (last - 1 + items.length) % items.length;
         T item = items[last];
         items[last] = null;
+        if ((last - first + items.length) / (double) items.length < 0.25) {
+            resize(items.length / 2);
+        }
         return item;
     }
 

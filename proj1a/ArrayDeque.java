@@ -9,6 +9,12 @@ public class ArrayDeque<T> {
         last = 0;
     }
 
+    private int size() {
+        if(last >= first) {
+            return last - first;
+        }
+        return last - first + items.length;
+    }
     private void resize(int capacity) {
         assert first == last;
         T[] newItems = (T[]) new Object[capacity];
@@ -83,7 +89,8 @@ public class ArrayDeque<T> {
         T item = items[first];
         items[first] = null;
         first = (first + 1) % items.length;
-        if ((last - first + items.length) / (double) items.length < 0.25) {
+        int total = size();
+        if(items.length >= 16 && (double)total / item.length < 0.25) {
             resize(items.length / 2);
         }
         return item;
@@ -100,7 +107,8 @@ public class ArrayDeque<T> {
         last = (last - 1 + items.length) % items.length;
         T item = items[last];
         items[last] = null;
-        if ((last - first + items.length) / (double) items.length < 0.25) {
+        int total = size();
+        if(items.length >= 16 && (double)total / item.length < 0.25) {
             resize(items.length / 2);
         }
         return item;

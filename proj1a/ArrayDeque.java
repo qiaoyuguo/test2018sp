@@ -19,7 +19,7 @@ public class ArrayDeque<T> {
      * add an item of type T to the front of the queue
      */
     public void addFirst(T item) {
-        first = (first - 1) % items.length;
+        first = (first - 1 + items.length) % items.length;
         items[first] = item;
         if (first == last) {
             resize(2 * items.length);
@@ -48,7 +48,7 @@ public class ArrayDeque<T> {
      * Returns the number of items in the deque.
      */
     public int size() {
-        return (last - first) % items.length;
+        return (last - first + items.length) % items.length;
     }
 
     /**
@@ -92,7 +92,7 @@ public class ArrayDeque<T> {
         }
         T item = items[last];
         items[last] = null;
-        last = (last - 1) % items.length;
+        last = (last - 1 + items.length) % items.length;
         return item;
     }
 

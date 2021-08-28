@@ -9,7 +9,22 @@ public class ArrayDeque<T> {
         last = 0;
     }
 
-    private void resize(int capacity) {
+    private void shrink(int capacity) {
+        T[] newItems = (T[]) new Object[capacity];
+        if (last > first) {
+            System.arraycopy(items, first, newItems, 0, last - first);
+            last = last - first;
+            first = 0;
+        } else {
+            System.arraycopy(items, first, newItems, 0, items.length - first);
+            System.arraycopy(items, 0, newItems, items.length - first, last);
+            last = items.length - first + last;
+            first = 0;
+        }
+        items = newItems;
+    }
+
+    private void growth(int capacity) {
         assert first == last;
         T[] newItems = (T[]) new Object[capacity];
         System.arraycopy(items, first, newItems, 0, items.length - first);
@@ -26,7 +41,7 @@ public class ArrayDeque<T> {
         first = (first - 1 + items.length) % items.length;
         items[first] = item;
         if (first == last) {
-            resize(2 * items.length);
+            growth(2 * items.length);
         }
     }
 
@@ -37,7 +52,7 @@ public class ArrayDeque<T> {
         items[last] = item;
         last = (last + 1) % items.length;
         if (first == last) {
-            resize(2 * items.length);
+            growth(2 * items.length);
         }
     }
 
@@ -69,7 +84,7 @@ public class ArrayDeque<T> {
             }
             System.out.print(items[i]);
         }
-        System.out.println();
+        System.out.println(" " + items.length);
     }
 
     /**
@@ -85,7 +100,7 @@ public class ArrayDeque<T> {
         first = (first + 1) % items.length;
         int total = size();
         if (items.length >= 16 && (double) total / items.length < 0.25) {
-            resize(items.length / 2);
+            shrink(items.length / 2);
         }
         return item;
     }
@@ -103,7 +118,7 @@ public class ArrayDeque<T> {
         items[last] = null;
         int total = size();
         if (items.length >= 16 && (double) total / items.length < 0.25) {
-            resize(items.length / 2);
+            shrink(items.length / 2);
         }
         return item;
     }

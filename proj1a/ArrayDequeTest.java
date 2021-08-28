@@ -98,6 +98,11 @@ public class ArrayDequeTest {
         ad1.addFirst(10);
         System.out.println(ad1.get(0));
         ad1.printDeque();
+        ad1.removeFirst();
+        ad1.removeLast();
+        ad1.removeLast();
+        ad1.printDeque();
+        System.out.println(ad1.size());
         printTestStatus(passed);
     }
 

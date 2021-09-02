@@ -28,14 +28,14 @@ public class TestArrayDequeGold {
                 int x = ads.removeFirst();
                 int y = sad.removeFirst();
                 if (x != y) {
-                    ops += "removeFirst(), student was " + y + ", correct was " + x + "\n";
+                    ops += "removeFirst()\n";
                 }
                 org.junit.Assert.assertEquals(ops, x, y);
             } else if (!ads.isEmpty() && !sad.isEmpty()) {
                 int x = ads.removeLast();
                 int y = sad.removeLast();
                 if (x != y) {
-                    ops += "removeLast(), student was " + y + ", correct was " + x + "\n";
+                    ops += "removeLast()\n ";
                 }
                 org.junit.Assert.assertEquals(ops, x, y);
             }
